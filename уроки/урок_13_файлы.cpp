@@ -1,6 +1,6 @@
 /*
 ===========================================
-УРОК 11: РАБОТА С ФАЙЛАМИ
+УРОК 13: РАБОТА С ФАЙЛАМИ
 ===========================================
 
 ЦЕЛИ УРОКА:
@@ -369,6 +369,36 @@ while (getline(file, line)) {
 
 file.close();
 
+СИНТАКСИС УРОКА:
+
+1. Подключение библиотеки:
+   #include <fstream>
+
+2. Запись в файл:
+   ofstream file("имя_файла.txt");
+   file << "текст" << endl;
+   file.close();
+
+3. Чтение из файла:
+   ifstream file("имя_файла.txt");
+   string line;
+   getline(file, line);
+   file.close();
+
+4. Проверка открытия:
+   if (file.is_open()) { ... }
+   if (!file) { ... }
+
+5. Чтение всего файла:
+   while (getline(file, line)) {
+       cout << line << endl;
+   }
+
+6. Режимы открытия:
+   ios::app      // добавление в конец
+   ios::trunc    // очистка файла
+   ios::binary   // бинарный режим
+
 ПРИМЕРЫ КОДА:
 */
 
@@ -377,7 +407,7 @@ file.close();
 #include <string>
 using namespace std;
 
-int main() {
+void examples() {
     // Запись в файл
     cout << "=== ЗАПИСЬ В ФАЙЛ ===" << endl;
     ofstream outputFile("example.txt");
@@ -427,8 +457,6 @@ int main() {
         cout << endl;
         readNumbers.close();
     }
-    
-    return 0;
 }
 
 /*
@@ -620,14 +648,10 @@ void exercise5() {
 ===========================================
 */
 
-#include <iostream>
-#include <fstream>
-#include <string>
-using namespace std;
-
 int main() {
-    // Основная программа
-    cout << "=== УРОК 11: РАБОТА С ФАЙЛАМИ ===" << endl;
+    cout << "=== УРОК 13: РАБОТА С ФАЙЛАМИ ===" << endl;
+    
+    examples();
     
     // Выполняем упражнения
     cout << "\n=== УПРАЖНЕНИЕ 1: ЗАПИСЬ ДАННЫХ СТУДЕНТОВ ===" << endl;

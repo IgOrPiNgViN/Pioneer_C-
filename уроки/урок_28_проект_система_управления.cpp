@@ -309,6 +309,8 @@
    - Валидация данных
    - Проверка дубликатов
 
+В этом проекте применяются концепции из предыдущих уроков.
+
 ПРИМЕРЫ КОДА:
 */
 
@@ -320,6 +322,8 @@
 #include <fstream>
 #include <algorithm>
 #include <iomanip>
+#include <map>
+#include <limits>
 using namespace std;
 
 // Базовый класс для персон
@@ -804,13 +808,11 @@ private:
     }
 };
 
-int main() {
+void examples() {
     cout << "=== ПРОЕКТ 'СИСТЕМА УПРАВЛЕНИЯ СТУДЕНТАМИ' ===" << endl;
     
     StudentSystemMenu menu;
     menu.run();
-    
-    return 0;
 }
 
 /*
@@ -1046,23 +1048,9 @@ void exercise3() {
 ===========================================
 */
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <memory>
-#include <stdexcept>
-#include <fstream>
-#include <algorithm>
-#include <iomanip>
-#include <map>
-#include <limits>
-using namespace std;
-
 int main() {
-    // Основная программа
     cout << "=== УРОК 28: ПРОЕКТ 'СИСТЕМА УПРАВЛЕНИЯ СТУДЕНТАМИ' ===" << endl;
     
-    // Выполняем упражнения
     cout << "\n=== УПРАЖНЕНИЕ 1: НОВЫЕ ФУНКЦИИ ===" << endl;
     exercise1();
     

@@ -401,6 +401,8 @@
    - Следование принципам ООП
    - Лучшие практики C++
 
+В этом проекте применяются концепции из предыдущих уроков.
+
 ПРИМЕРЫ КОДА:
 */
 
@@ -1070,13 +1072,11 @@ private:
     }
 };
 
-int main() {
+void examples() {
     cout << "=== ИТОГОВЫЙ ПРОЕКТ: СИСТЕМА УПРАВЛЕНИЯ УНИВЕРСИТЕТОМ ===" << endl;
     
     UniversitySystemMenu menu;
     menu.run();
-    
-    return 0;
 }
 
 /*
@@ -1413,25 +1413,9 @@ void exercise3() {
 ===========================================
 */
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <memory>
-#include <stdexcept>
-#include <fstream>
-#include <algorithm>
-#include <iomanip>
-#include <map>
-#include <set>
-#include <ctime>
-#include <cstdlib>
-using namespace std;
-
 int main() {
-    // Основная программа
     cout << "=== УРОК 30: ИТОГОВЫЙ ПРОЕКТ И ЗАКЛЮЧЕНИЕ ===" << endl;
     
-    // Выполняем упражнения
     cout << "\n=== УПРАЖНЕНИЕ 1: РАСШИРЕНИЕ ФУНКЦИОНАЛЬНОСТИ ===" << endl;
     exercise1();
     

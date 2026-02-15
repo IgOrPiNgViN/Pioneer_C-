@@ -1,6 +1,6 @@
 /*
 ===========================================
-УРОК 15: ПОЛИМОРФИЗМ
+УРОК 17: ПОЛИМОРФИЗМ
 ===========================================
 
 ЦЕЛИ УРОКА:
@@ -342,6 +342,37 @@ shape.getArea();  // вызовет Shape::getArea(), а не Circle::getArea()
 - Используйте ссылки: Shape& shape = circle;
 - Не присваивайте объекты напрямую
 
+СИНТАКСИС УРОКА:
+
+1. Виртуальная функция:
+   class Base {
+   public:
+       virtual void method() { }
+   };
+
+2. Переопределение (override):
+   class Derived : public Base {
+   public:
+       void method() override { }
+   };
+
+3. Чисто виртуальная функция (абстрактный метод):
+   virtual void method() = 0;
+
+4. Абстрактный класс:
+   class Abstract {
+   public:
+       virtual void method() = 0;  // нельзя создать объект этого класса
+   };
+
+5. Полиморфизм через указатель:
+   Base* ptr = new Derived();
+   ptr->method();  // вызовется метод Derived
+   delete ptr;
+
+6. Виртуальный деструктор:
+   virtual ~Base() { }
+
 ИНТЕРФЕЙСЫ:
 
 В C++ интерфейсы реализуются через абстрактные классы с чисто виртуальными функциями.
@@ -493,7 +524,7 @@ public:
     }
 };
 
-int main() {
+void examples() {
     cout << "=== ДЕМОНСТРАЦИЯ ПОЛИМОРФИЗМА ===" << endl;
     
     // Создание объектов
@@ -530,7 +561,7 @@ int main() {
         delete shape;
     }
     
-    return 0;
+    cout << "\n=== КОНЕЦ ДЕМОНСТРАЦИИ ===" << endl;
 }
 
 /*
@@ -854,17 +885,12 @@ void exercise3() {
 ===========================================
 */
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <cmath>
-using namespace std;
-
 int main() {
-    // Основная программа
-    cout << "=== УРОК 15: ПОЛИМОРФИЗМ ===" << endl;
+    cout << "=== УРОК 17: ПОЛИМОРФИЗМ ===" << endl;
     
-    // Выполняем упражнения
+    cout << "\n=== ПРИМЕРЫ ===" << endl;
+    examples();
+    
     cout << "\n=== УПРАЖНЕНИЕ 1: ПОЛИМОРФИЗМ ЖИВОТНЫХ ===" << endl;
     exercise1();
     

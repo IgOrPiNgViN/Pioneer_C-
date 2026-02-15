@@ -243,40 +243,7 @@ true (истина) или false (ложь).
    - Может быть менее читаемым для сложных условий
    - Не рекомендуется для вложенных условий
 
-ЛОГИЧЕСКИЕ ВЫРАЖЕНИЯ В УСЛОВИЯХ:
-
-Логические операторы позволяют комбинировать несколько условий.
-
-1. && (логическое И, AND):
-   - Оба условия должны быть истинными
-   - Пример: (age >= 18) && (hasLicense)
-   - Выполняется только если И возраст >= 18, И есть права
-   
-2. || (логическое ИЛИ, OR):
-   - Хотя бы одно условие должно быть истинным
-   - Пример: (isStudent) || (isTeacher)
-   - Выполняется если студент ИЛИ учитель
-   
-3. ! (логическое НЕ, NOT):
-   - Инвертирует условие
-   - Пример: !isPassed (не сдан)
-   
-Примеры комбинаций:
-int age = 20;
-bool hasLicense = true;
-bool isStudent = false;
-
-if (age >= 18 && hasLicense) {
-    cout << "Можно водить" << endl;
-}
-
-if (isStudent || age < 18) {
-    cout << "Скидка доступна" << endl;
-}
-
-if (!isStudent && age >= 18) {
-    cout << "Взрослый, не студент" << endl;
-}
+Напоминание: логические операторы &&, ||, ! были изучены в уроке 03. Здесь мы применяем их внутри условий.
 
 ВЛОЖЕННЫЕ УСЛОВИЯ:
 
@@ -326,81 +293,50 @@ if (!flag) {  // эквивалентно if (flag == false)
 Рекомендация: Для bool используйте явные сравнения для ясности:
 if (flag == true)  // более понятно, чем if (flag)
 
+СИНТАКСИС УРОКА:
+
+1. Оператор if:
+   if (условие) {
+       // код, если условие истинно
+   }
+
+2. Оператор if-else:
+   if (условие) {
+       // код, если истинно
+   } else {
+       // код, если ложно
+   }
+
+3. Оператор if-else if-else:
+   if (условие1) {
+       // код для условия1
+   } else if (условие2) {
+       // код для условия2
+   } else {
+       // код для всех остальных случаев
+   }
+
+4. Оператор switch:
+   switch (переменная) {
+       case значение1:
+           // код
+           break;
+       case значение2:
+           // код
+           break;
+       default:
+           // код по умолчанию
+           break;
+   }
+
+5. Тернарный оператор:
+   результат = (условие) ? значение_если_true : значение_если_false;
+
 ПРИМЕРЫ КОДА:
 */
 
 #include <iostream>
 using namespace std;
-
-int main() {
-    // Простой if
-    int age = 18;
-    cout << "=== ПРОСТОЙ IF ===" << endl;
-    if (age >= 18) {
-        cout << "Вы совершеннолетний" << endl;
-    }
-    
-    // If-else
-    int temperature = 25;
-    cout << "\n=== IF-ELSE ===" << endl;
-    if (temperature > 30) {
-        cout << "Жарко!" << endl;
-    } else { 
-        cout << "Не жарко" << endl;
-    }
-    
-    // If-else if-else
-    int score = 85;
-    cout << "\n=== IF-ELSE IF-ELSE ===" << endl;
-    if (score >= 90) {
-        cout << "Отлично!" << endl;
-    } else if (score >= 80) {
-        cout << "Хорошо!" << endl;
-    } else if (score >= 70) {
-        cout << "Удовлетворительно" << endl;
-    } else {
-        cout << "Неудовлетворительно" << endl;
-    }
-    
-    // Switch
-    char grade = 'B';
-    cout << "\n=== SWITCH ===" << endl;
-    switch (grade) {
-        case 'A':
-            cout << "Отлично!" << endl;
-            break;
-        case 'B':
-            cout << "Хорошо!" << endl;
-            break;
-        case 'C':
-            cout << "Удовлетворительно" << endl;
-            break;
-        case 'D':
-            cout << "Плохо" << endl;
-            break;
-        default:
-            cout << "Неизвестная оценка" << endl;
-            break;
-    }
-    
-    // Тернарный оператор
-    int a = 10, b = 20;
-    cout << "\n=== ТЕРНАРНЫЙ ОПЕРАТОР ===" << endl;
-    int max = (a > b) ? a : b;
-    cout << "Максимум из " << a << " и " << b << " = " << max << endl;
-    
-    // Логические операторы
-    bool isStudent = true;
-    bool hasScholarship = false;
-    cout << "\n=== ЛОГИЧЕСКИЕ ОПЕРАТОРЫ ===" << endl;
-    cout << "Студент: " << isStudent << endl;
-    cout << "Стипендия: " << hasScholarship << endl;
-    cout << "Студент И стипендия: " << (isStudent && hasScholarship) << endl;
-    cout << "Студент ИЛИ стипендия: " << (isStudent || hasScholarship) << endl;
-    cout << "НЕ студент: " << (!isStudent) << endl;
-    
-    return 0;
-}
 
 /*
 ПРАКТИЧЕСКИЕ УПРАЖНЕНИЯ:
@@ -534,6 +470,74 @@ void exercise4() {
     }
 }
 
+void runExamples() {
+    // Простой if
+    int age = 18;
+    cout << "=== ПРОСТОЙ IF ===" << endl;
+    if (age >= 18) {
+        cout << "Вы совершеннолетний" << endl;
+    }
+    
+    // If-else
+    int temperature = 25;
+    cout << "\n=== IF-ELSE ===" << endl;
+    if (temperature > 30) {
+        cout << "Жарко!" << endl;
+    } else { 
+        cout << "Не жарко" << endl;
+    }
+    
+    // If-else if-else
+    int score = 85;
+    cout << "\n=== IF-ELSE IF-ELSE ===" << endl;
+    if (score >= 90) {
+        cout << "Отлично!" << endl;
+    } else if (score >= 80) {
+        cout << "Хорошо!" << endl;
+    } else if (score >= 70) {
+        cout << "Удовлетворительно" << endl;
+    } else {
+        cout << "Неудовлетворительно" << endl;
+    }
+    
+    // Switch
+    char grade = 'B';
+    cout << "\n=== SWITCH ===" << endl;
+    switch (grade) {
+        case 'A':
+            cout << "Отлично!" << endl;
+            break;
+        case 'B':
+            cout << "Хорошо!" << endl;
+            break;
+        case 'C':
+            cout << "Удовлетворительно" << endl;
+            break;
+        case 'D':
+            cout << "Плохо" << endl;
+            break;
+        default:
+            cout << "Неизвестная оценка" << endl;
+            break;
+    }
+    
+    // Тернарный оператор
+    int a = 10, b = 20;
+    cout << "\n=== ТЕРНАРНЫЙ ОПЕРАТОР ===" << endl;
+    int max = (a > b) ? a : b;
+    cout << "Максимум из " << a << " и " << b << " = " << max << endl;
+    
+    // Логические операторы
+    bool isStudent = true;
+    bool hasScholarship = false;
+    cout << "\n=== ЛОГИЧЕСКИЕ ОПЕРАТОРЫ ===" << endl;
+    cout << "Студент: " << isStudent << endl;
+    cout << "Стипендия: " << hasScholarship << endl;
+    cout << "Студент И стипендия: " << (isStudent && hasScholarship) << endl;
+    cout << "Студент ИЛИ стипендия: " << (isStudent || hasScholarship) << endl;
+    cout << "НЕ студент: " << (!isStudent) << endl;
+}
+
 /*
 ДОМАШНИЕ ЗАДАНИЯ:
 
@@ -580,14 +584,13 @@ void exercise4() {
 ===========================================
 */
 
-#include <iostream>
-using namespace std;
-
 int main() {
-    // Основная программа
     cout << "=== УРОК 4: УСЛОВНЫЕ ОПЕРАТОРЫ ===" << endl;
     
-    // Выполняем упражнения
+    // Примеры кода
+    runExamples();
+    
+    // Упражнения
     cout << "\n=== УПРАЖНЕНИЕ 1: ОПРЕДЕЛЕНИЕ ВОЗРАСТА ===" << endl;
     exercise1();
     
@@ -602,22 +605,6 @@ int main() {
     
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,6 +1,6 @@
 /*
 ===========================================
-УРОК 7: СТРОКИ
+УРОК 8: СТРОКИ
 ===========================================
 
 ЦЕЛИ УРОКА:
@@ -205,15 +205,47 @@
        char c = *it;
    }
 
+СИНТАКСИС УРОКА:
+
+1. Объявление строки:
+   #include <string>
+   string имя = "текст";
+   string name = "Иван";
+
+2. Ввод строки:
+   cin >> str;              // одно слово (до пробела)
+   getline(cin, str);       // вся строка (с пробелами)
+
+3. Длина строки:
+   str.length()    или    str.size()
+
+4. Доступ к символу:
+   str[индекс]             // индексация с 0
+   str.at(индекс)          // с проверкой границ
+
+5. Конкатенация (соединение):
+   string result = str1 + str2;
+   str1 += str2;
+
+6. Сравнение строк:
+   str1 == str2    str1 != str2    str1 < str2
+
+7. Подстрока:
+   str.substr(начало, длина)
+
+8. Поиск:
+   str.find("подстрока")   // возвращает позицию или string::npos
+
 ПРИМЕРЫ КОДА:
 */
 
 #include <iostream>
 #include <string>
-#include <cstring> // для C-строк
+#include <cstring>
+#include <cctype>
 using namespace std;
 
-int main() {
+void examples() {
     // C-строки
     cout << "=== C-СТРОКИ ===" << endl;
     char cstr[50] = "Hello";
@@ -268,8 +300,6 @@ int main() {
     cout << "\n=== ИЗВЛЕЧЕНИЕ ПОДСТРОКИ ===" << endl;
     string substr = text.substr(6, 5); // начиная с позиции 6, длина 5
     cout << "Подстрока: " << substr << endl;
-    
-    return 0;
 }
 
 /*
@@ -466,17 +496,11 @@ void exercise5() {
 ===========================================
 */
 
-#include <iostream>
-#include <string>
-#include <cstring>
-#include <cctype>
-using namespace std;
-
 int main() {
-    // Основная программа
-    cout << "=== УРОК 7: СТРОКИ ===" << endl;
+    cout << "=== УРОК 8: СТРОКИ ===" << endl;
     
-    // Выполняем упражнения
+    examples();
+    
     cout << "\n=== УПРАЖНЕНИЕ 1: ПОДСЧЕТ СИМВОЛОВ ===" << endl;
     exercise1();
     

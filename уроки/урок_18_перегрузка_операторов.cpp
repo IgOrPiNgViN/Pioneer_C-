@@ -1,6 +1,6 @@
 /*
 ===========================================
-УРОК 16: ПЕРЕГРУЗКА ОПЕРАТОРОВ
+УРОК 18: ПЕРЕГРУЗКА ОПЕРАТОРОВ
 ===========================================
 
 ЦЕЛИ УРОКА:
@@ -298,11 +298,43 @@ int result = mult(10);  // result = 50
 5. Проверяйте на самоприсваивание в operator=
 6. Используйте friend для операторов ввода/вывода
 
+СИНТАКСИС УРОКА:
+
+1. Перегрузка как метод класса:
+   class MyClass {
+   public:
+       MyClass operator+(const MyClass& other) {
+           // реализация сложения
+       }
+   };
+
+2. Перегрузка как дружественная функция:
+   friend MyClass operator+(const MyClass& a, const MyClass& b);
+
+3. Перегрузка оператора вывода:
+   friend ostream& operator<<(ostream& os, const MyClass& obj) {
+       os << obj.field;
+       return os;
+   }
+
+4. Перегрузка оператора сравнения:
+   bool operator==(const MyClass& other) {
+       return field == other.field;
+   }
+
+5. Перегрузка оператора присваивания:
+   MyClass& operator=(const MyClass& other) {
+       field = other.field;
+       return *this;
+   }
+
 ПРИМЕРЫ КОДА:
 */
 
 #include <iostream>
 #include <string>
+#include <cstring>
+#include <cmath>
 using namespace std;
 
 // Класс для работы с комплексными числами
@@ -394,7 +426,7 @@ public:
     double getImag() const { return imag; }
 };
 
-int main() {
+void examples() {
     cout << "=== ДЕМОНСТРАЦИЯ ПЕРЕГРУЗКИ ОПЕРАТОРОВ ===" << endl;
     
     // Создание комплексных чисел
@@ -436,7 +468,7 @@ int main() {
     cout << "c4++ = " << c4++ << endl;
     cout << "c4 = " << c4 << endl;
     
-    return 0;
+    cout << "\n=== КОНЕЦ ДЕМОНСТРАЦИИ ===" << endl;
 }
 
 /*
@@ -827,17 +859,12 @@ void exercise3() {
 ===========================================
 */
 
-#include <iostream>
-#include <string>
-#include <cstring>
-#include <cmath>
-using namespace std;
-
 int main() {
-    // Основная программа
-    cout << "=== УРОК 16: ПЕРЕГРУЗКА ОПЕРАТОРОВ ===" << endl;
+    cout << "=== УРОК 18: ПЕРЕГРУЗКА ОПЕРАТОРОВ ===" << endl;
     
-    // Выполняем упражнения
+    cout << "\n=== ПРИМЕРЫ ===" << endl;
+    examples();
+    
     cout << "\n=== УПРАЖНЕНИЕ 1: ВЕКТОРЫ ===" << endl;
     exercise1();
     

@@ -1,6 +1,6 @@
 /*
 ===========================================
-УРОК 17: ШАБЛОНЫ
+УРОК 19: ШАБЛОНЫ
 ===========================================
 
 ЦЕЛИ УРОКА:
@@ -198,6 +198,32 @@ template <typename T>  // или template <class T>
 2. Сложные сообщения об ошибках
 3. Дольше компиляция
 
+СИНТАКСИС УРОКА:
+
+1. Шаблон функции:
+   template <typename T>
+   T maximum(T a, T b) {
+       return (a > b) ? a : b;
+   }
+
+2. Вызов шаблонной функции:
+   int result = maximum(5, 3);
+   double result = maximum<double>(5.5, 3.3);
+
+3. Шаблон класса:
+   template <typename T>
+   class Container {
+   private:
+       T value;
+   public:
+       void set(T v) { value = v; }
+       T get() { return value; }
+   };
+
+4. Использование шаблонного класса:
+   Container<int> intBox;
+   Container<string> strBox;
+
 ПРИМЕРЫ КОДА:
 */
 
@@ -251,7 +277,7 @@ void printArray(T arr[], int size) {
     cout << endl;
 }
 
-int main() {
+void examples() {
     cout << "=== ДЕМОНСТРАЦИЯ ШАБЛОНОВ ФУНКЦИЙ ===" << endl;
     
     // Работа с целыми числами
@@ -292,8 +318,6 @@ int main() {
     } else {
         cout << "Элемент " << target << " не найден" << endl;
     }
-    
-    return 0;
 }
 
 /*
@@ -607,15 +631,11 @@ void exercise3() {
 ===========================================
 */
 
-#include <iostream>
-#include <string>
-using namespace std;
-
 int main() {
-    // Основная программа
-    cout << "=== УРОК 17: ШАБЛОНЫ ===" << endl;
+    cout << "=== УРОК 19: ШАБЛОНЫ ===" << endl;
     
-    // Выполняем упражнения
+    examples();
+    
     cout << "\n=== УПРАЖНЕНИЕ 1: ШАБЛОН КЛАССА PAIR ===" << endl;
     exercise1();
     

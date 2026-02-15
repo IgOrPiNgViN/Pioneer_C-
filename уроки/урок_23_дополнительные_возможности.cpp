@@ -1,6 +1,6 @@
 /*
 ===========================================
-УРОК 21: ДОПОЛНИТЕЛЬНЫЕ ВОЗМОЖНОСТИ C++
+УРОК 23: ДОПОЛНИТЕЛЬНЫЕ ВОЗМОЖНОСТИ C++
 ===========================================
 
 ЦЕЛИ УРОКА:
@@ -244,6 +244,14 @@ C++20:
 - Coroutines
 - Modules
 
+СИНТАКСИС УРОКА:
+
+1. Лямбда: [](int n) { return n % 2 == 0; }, [&var](x) { ... }
+2. auto: auto name = string("Иван"); auto it = vec.begin();
+3. Умные указатели: unique_ptr<T>, shared_ptr<T>, make_unique<T>(), make_shared<T>()
+4. Range-based for: for (const auto& x : container) { }
+5. move(): vector<int> dest = move(source);
+
 ПРИМЕРЫ КОДА:
 */
 
@@ -254,7 +262,7 @@ C++20:
 #include <string>
 using namespace std;
 
-int main() {
+void examples() {
     cout << "=== ДОПОЛНИТЕЛЬНЫЕ ВОЗМОЖНОСТИ C++ ===" << endl;
     
     // Лямбда-выражения
@@ -517,18 +525,14 @@ void exercise3() {
 ===========================================
 */
 
-#include <iostream>
-#include <vector>
-#include <memory>
-#include <algorithm>
-#include <string>
-using namespace std;
-
+// === ГЛАВНАЯ ФУНКЦИЯ ===
 int main() {
-    // Основная программа
-    cout << "=== УРОК 21: ДОПОЛНИТЕЛЬНЫЕ ВОЗМОЖНОСТИ C++ ===" << endl;
+    cout << "=== УРОК 23: ДОПОЛНИТЕЛЬНЫЕ ВОЗМОЖНОСТИ C++ ===" << endl;
     
-    // Выполняем упражнения
+    // Примеры кода
+    examples();
+    
+    // Упражнения
     cout << "\n=== УПРАЖНЕНИЕ 1: ЛЯМБДА-ВЫРАЖЕНИЯ ===" << endl;
     exercise1();
     
@@ -540,8 +544,6 @@ int main() {
     
     return 0;
 }
-
-
 
 
 

@@ -1,6 +1,6 @@
 /*
 ===========================================
-УРОК 19: ОБРАБОТКА ИСКЛЮЧЕНИЙ
+УРОК 21: ОБРАБОТКА ИСКЛЮЧЕНИЙ
 ===========================================
 
 ЦЕЛИ УРОКА:
@@ -66,12 +66,41 @@ try {
 3. Исключения могут быть вложенными
 4. Можно перебрасывать исключения (rethrow)
 
+СИНТАКСИС УРОКА:
+
+1. Блок try-catch:
+   try {
+       // код, который может вызвать ошибку
+   } catch (тип_исключения& e) {
+       // обработка ошибки
+   }
+
+2. Выброс исключения:
+   throw runtime_error("сообщение");
+   throw invalid_argument("сообщение");
+
+3. Несколько catch:
+   try { ... }
+   catch (runtime_error& e) { ... }
+   catch (exception& e) { ... }
+   catch (...) { /* любое исключение */ }
+
+4. Пользовательское исключение:
+   class MyError : public exception {
+   public:
+       const char* what() const noexcept override {
+           return "описание ошибки";
+       }
+   };
+
 ПРИМЕРЫ КОДА:
 */
 
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <fstream>
+#include <vector>
 using namespace std;
 
 // Функция для деления с проверкой
@@ -106,7 +135,7 @@ long long factorial(int n) {
     return result;
 }
 
-int main() {
+void examples() {
     cout << "=== ДЕМОНСТРАЦИЯ ОБРАБОТКИ ИСКЛЮЧЕНИЙ ===" << endl;
     
     // Обработка деления на ноль
@@ -168,8 +197,6 @@ int main() {
     } catch (...) {
         cout << "Неизвестная ошибка!" << endl;
     }
-    
-    return 0;
 }
 
 /*
@@ -325,9 +352,6 @@ void exercise3() {
 Создай программу для работы с контейнерами STL с обработкой исключений:
 */
 
-#include <vector>
-#include <stdexcept>
-
 void exercise4() {
     cout << "=== УПРАЖНЕНИЕ 4: КОНТЕЙНЕРЫ STL ===" << endl;
     
@@ -409,16 +433,10 @@ void exercise4() {
 ===========================================
 */
 
-#include <iostream>
-#include <stdexcept>
-#include <string>
-#include <fstream>
-#include <vector>
-using namespace std;
-
 int main() {
-    // Основная программа
-    cout << "=== УРОК 19: ОБРАБОТКА ИСКЛЮЧЕНИЙ ===" << endl;
+    cout << "=== УРОК 21: ОБРАБОТКА ИСКЛЮЧЕНИЙ ===" << endl;
+    
+    examples();
     
     // Выполняем упражнения
     cout << "\n=== УПРАЖНЕНИЕ 1: БАНКОВСКИЙ СЧЕТ ===" << endl;

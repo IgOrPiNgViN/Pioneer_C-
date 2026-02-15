@@ -338,6 +338,8 @@
    - Обработка ошибок ввода
    - Валидация ходов
 
+В этом проекте применяются концепции из предыдущих уроков.
+
 ПРИМЕРЫ КОДА:
 */
 
@@ -772,13 +774,11 @@ private:
     }
 };
 
-int main() {
+void examples() {
     cout << "=== ПРОЕКТ 'КРЕСТИКИ-НОЛИКИ' ===" << endl;
     
     GameMenu menu;
     menu.run();
-    
-    return 0;
 }
 
 /*
@@ -1191,22 +1191,9 @@ void exercise3() {
 ===========================================
 */
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <memory>
-#include <stdexcept>
-#include <algorithm>
-#include <ctime>
-#include <cstdlib>
-#include <iomanip>
-using namespace std;
-
 int main() {
-    // Основная программа
     cout << "=== УРОК 29: ПРОЕКТ 'КРЕСТИКИ-НОЛИКИ' ===" << endl;
     
-    // Выполняем упражнения
     cout << "\n=== УПРАЖНЕНИЕ 1: УЛУЧШЕННЫЙ ИИ ===" << endl;
     exercise1();
     

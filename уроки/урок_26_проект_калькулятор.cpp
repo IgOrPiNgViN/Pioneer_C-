@@ -292,6 +292,8 @@
    - Сохранение истории в файл
    - Загрузка истории из файла
 
+В этом проекте применяются концепции из предыдущих уроков.
+
 ПРИМЕРЫ КОДА:
 */
 
@@ -301,6 +303,8 @@
 #include <memory>
 #include <stdexcept>
 #include <iomanip>
+#include <cmath>
+#include <limits>
 using namespace std;
 
 // Базовый класс для операций
@@ -536,13 +540,11 @@ public:
     }
 };
 
-int main() {
+void examples() {
     cout << "=== ПРОЕКТ 'КАЛЬКУЛЯТОР' ===" << endl;
     
     Menu menu;
     menu.run();
-    
-    return 0;
 }
 
 /*
@@ -782,21 +784,9 @@ void exercise3() {
 ===========================================
 */
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <memory>
-#include <stdexcept>
-#include <iomanip>
-#include <cmath>
-#include <limits>
-using namespace std;
-
 int main() {
-    // Основная программа
     cout << "=== УРОК 26: ПРОЕКТ 'КАЛЬКУЛЯТОР' ===" << endl;
     
-    // Выполняем упражнения
     cout << "\n=== УПРАЖНЕНИЕ 1: НОВЫЕ ОПЕРАЦИИ ===" << endl;
     exercise1();
     

@@ -357,6 +357,8 @@
    - Обработка ошибок ввода
    - Валидация данных
 
+В этом проекте применяются концепции из предыдущих уроков.
+
 ПРИМЕРЫ КОДА:
 */
 
@@ -369,6 +371,9 @@
 #include <cstdlib>
 #include <algorithm>
 #include <fstream>
+#include <iomanip>
+#include <limits>
+#include <climits>
 using namespace std;
 
 // Базовый класс для уровней сложности
@@ -748,13 +753,11 @@ private:
     }
 };
 
-int main() {
+void examples() {
     cout << "=== ПРОЕКТ 'ИГРА УГАДАЙ ЧИСЛО' ===" << endl;
     
     GameMenu menu;
     menu.run();
-    
-    return 0;
 }
 
 /*
@@ -972,24 +975,9 @@ void exercise3() {
 ===========================================
 */
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <memory>
-#include <stdexcept>
-#include <ctime>
-#include <cstdlib>
-#include <algorithm>
-#include <fstream>
-#include <iomanip>
-#include <limits>
-using namespace std;
-
 int main() {
-    // Основная программа
     cout << "=== УРОК 27: ПРОЕКТ 'ИГРА УГАДАЙ ЧИСЛО' ===" << endl;
     
-    // Выполняем упражнения
     cout << "\n=== УПРАЖНЕНИЕ 1: НОВЫЕ УРОВНИ СЛОЖНОСТИ ===" << endl;
     exercise1();
     
