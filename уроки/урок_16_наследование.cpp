@@ -4,11 +4,16 @@
 ===========================================
 
 ЦЕЛИ УРОКА:
-- Понять концепцию наследования
+- Понять концепцию наследования (отношение «является»)
 - Изучить базовые и производные классы
-- Освоить переопределение методов
-- Научиться работать с виртуальными функциями
-- Понять полиморфизм
+- Освоить public / protected / private наследование
+- Научиться переопределять методы и использовать protected
+- Кратко познакомиться с virtual (подробно — урок 17)
+
+ВАЖНО ПРО ПОРЯДОК:
+Этот урок — про иерархию классов и переиспользование кода.
+В примерах и ДЗ — обычное наследование без virtual и без Base*.
+Полиморфизм, virtual, абстрактные классы (= 0) — урок 17.
 
 ТЕОРЕТИЧЕСКАЯ ЧАСТЬ:
 
@@ -22,7 +27,7 @@
 1. Переиспользование кода: не нужно дублировать код базового класса
 2. Расширение функциональности: добавление новых возможностей
 3. Иерархия классов: логическая организация классов
-4. Полиморфизм: единый интерфейс для разных классов
+4. Полиморфизм: единый интерфейс для разных классов (подробно — урок 17)
 5. Модификация поведения: изменение методов базового класса
 
 ТЕРМИНОЛОГИЯ:
@@ -165,201 +170,19 @@ public:
 Dog dog;
 dog.makeSound();  // выводит "Гав-гав!"
 
-Важно: Без virtual это не полиморфизм! Это скрытие (hiding).
+VIRTUAL — КРАТКИЙ АНОНС (подробно — урок 17):
 
-ВИРТУАЛЬНЫЕ ФУНКЦИИ:
+Если писать Animal* p = new Dog(); и вызывать p->makeSound(),
+без virtual вызовется версия Animal, а не Dog.
+Чтобы работал «настоящий» полиморфизм, в базовом классе пишут:
+   virtual void makeSound();
+а в производном часто добавляют override.
+Виртуальный деструктор, abstract (= 0), массивы Base* — урок 17.
+На этом уроке в ДЗ достаточно обычного наследования без Base*.
 
-Виртуальные функции позволяют реализовать полиморфизм.
-
-1. ОБЪЯВЛЕНИЕ ВИРТУАЛЬНОЙ ФУНКЦИИ:
-
-   Синтаксис: virtual тип имя_функции(параметры);
-   
-   Пример:
-   class Animal {
-   public:
-       virtual void makeSound() {  // виртуальная функция
-           cout << "Животное издает звук" << endl;
-       }
-   };
-   
-   class Dog : public Animal {
-   public:
-       void makeSound() override {  // переопределение (C++11)
-           cout << "Гав-гав!" << endl;
-       }
-   };
-
-2. КЛЮЧЕВОЕ СЛОВО OVERRIDE (C++11):
-
-   override указывает, что функция переопределяет виртуальную функцию базового класса.
-   
-   Преимущества:
-   - Проверка компилятором (ошибка, если функция не переопределяет)
-   - Ясность намерений
-   - Защита от опечаток
-   
-   Пример:
-   class Dog : public Animal {
-   public:
-       void makeSound() override {  // правильно
-           // код
-       }
-       
-       // void makeSound() override;  // ОШИБКА! Нет виртуальной функции для переопределения
-   };
-
-3. КЛЮЧЕВОЕ СЛОВО FINAL (C++11):
-
-   final запрещает дальнейшее переопределение функции.
-   
-   Пример:
-   class Animal {
-   public:
-       virtual void makeSound() final {  // нельзя переопределить
-           // код
-       }
-   };
-   
-   class Dog : public Animal {
-   public:
-       // void makeSound() { }  // ОШИБКА! Функция final
-   };
-
-ПОЛИМОРФИЗМ ЧЕРЕЗ УКАЗАТЕЛИ И ССЫЛКИ:
-
-Полиморфизм работает только через указатели и ссылки!
-
-Пример:
-Animal* animal = new Dog();
-animal->makeSound();  // вызовет Dog::makeSound() (если virtual)
-
-Animal animal2 = Dog();  // НЕ полиморфизм! Это срезка (slicing)
-animal2.makeSound();     // вызовет Animal::makeSound()
-
-ВИРТУАЛЬНЫЙ ДЕСТРУКТОР:
-
-Если класс используется для полиморфизма, деструктор должен быть виртуальным!
-
-Пример:
-class Base {
-public:
-    virtual ~Base() {  // виртуальный деструктор
-        cout << "Деструктор Base" << endl;
-    }
-};
-
-class Derived : public Base {
-public:
-    ~Derived() {
-        cout << "Деструктор Derived" << endl;
-    }
-};
-
-Использование:
-Base* ptr = new Derived();
-delete ptr;  // вызовет оба деструктора (правильно)
-
-Без virtual деструктора:
-Base* ptr = new Derived();
-delete ptr;  // вызовет только деструктор Base (утечка памяти!)
-
-ПРАВИЛО: Если класс имеет виртуальные функции, деструктор должен быть виртуальным!
-
-МНОЖЕСТВЕННОЕ НАСЛЕДОВАНИЕ:
-
-Класс может наследоваться от нескольких базовых классов.
-
-Синтаксис:
-class Derived : public Base1, public Base2 {
-    // код
-};
-
-Пример:
-class Animal {
-    // код
-};
-
-class Pet {
-    // код
-};
-
-class Dog : public Animal, public Pet {
-    // наследует от обоих классов
-};
-
-Особенности:
-- Может быть сложным
-- Проблема ромба (diamond problem)
-- Используйте виртуальное наследование при необходимости
-
-ВИРТУАЛЬНОЕ НАСЛЕДОВАНИЕ:
-
-Решает проблему множественного наследования одного базового класса.
-
-Синтаксис:
-class Derived : public virtual Base {
-    // код
-};
-
-Пример:
-class Animal {
-    // код
-};
-
-class Mammal : public virtual Animal { };
-class Pet : public virtual Animal { };
-
-class Dog : public Mammal, public Pet {
-    // Animal наследуется только один раз
-};
-
-ДОСТУП К ЧЛЕНАМ БАЗОВОГО КЛАССА:
-
-1. Доступ к переопределенным методам:
-   class Base {
-   public:
-       void func() { }
-   };
-   
-   class Derived : public Base {
-   public:
-       void func() {
-           Base::func();  // вызов метода базового класса
-           // дополнительный код
-       }
-   };
-
-2. Доступ к полям базового класса:
-   class Base {
-   protected:
-       int value;
-   };
-   
-   class Derived : public Base {
-   public:
-       void setValue(int v) {
-           value = v;  // доступ к protected полю
-       }
-   };
-
-КОНСТРУКТОРЫ И ДЕСТРУКТОРЫ В НАСЛЕДОВАНИИ:
-
-1. Порядок вызова конструкторов:
-   - Сначала конструктор базового класса
-   - Потом конструктор производного класса
-   
-2. Порядок вызова деструкторов:
-   - Сначала деструктор производного класса
-   - Потом деструктор базового класса
-
-3. Явный вызов конструктора базового класса:
-   class Derived : public Base {
-   public:
-       Derived(int x) : Base(x) {  // вызов конструктора Base
-           // код
-       }
-   };
+МНОЖЕСТВЕННОЕ НАСЛЕДОВАНИЕ — кратко:
+Класс может наследоваться от нескольких баз (сложная тема).
+Для курса достаточно одного public-наследования.
 
 СИНТАКСИС УРОКА:
 
@@ -416,17 +239,15 @@ public:
         cout << "Создано животное: " << name << endl;
     }
     
-    // Виртуальная функция
-    virtual void makeSound() {
+    void makeSound() {
         cout << name << " издает звук" << endl;
     }
     
-    virtual void displayInfo() {
+    void displayInfo() {
         cout << "Животное: " << name << ", возраст: " << age << endl;
     }
     
-    // Виртуальный деструктор
-    virtual ~Animal() {
+    ~Animal() {
         cout << "Уничтожено животное: " << name << endl;
     }
 };
@@ -442,11 +263,11 @@ public:
     }
     
     // Переопределение метода
-    void makeSound() override {
+    void makeSound() {
         cout << name << " лает: Гав-гав!" << endl;
     }
     
-    void displayInfo() override {
+    void displayInfo() {
         cout << "Собака: " << name << ", возраст: " << age << ", порода: " << breed << endl;
     }
     
@@ -466,11 +287,11 @@ public:
         cout << "Создана кошка: " << name << endl;
     }
     
-    void makeSound() override {
+    void makeSound() {
         cout << name << " мяукает: Мяу-мяу!" << endl;
     }
     
-    void displayInfo() override {
+    void displayInfo() {
         cout << "Кошка: " << name << ", возраст: " << age 
              << ", домашняя: " << (isIndoor ? "Да" : "Нет") << endl;
     }
@@ -499,21 +320,17 @@ void examples() {
     dog.fetch();
     cat.climb();
     
-    cout << "\n=== ПОЛИМОРФИЗМ ===" << endl;
-    Animal* animals[2];
-    animals[0] = new Dog("Рекс", 4, "Овчарка");
-    animals[1] = new Cat("Васька", 1, false);
+    cout << "\n=== ПЕРЕОПРЕДЕЛЕНИЕ МЕТОДОВ ===" << endl;
+    // Вызов переопределённых методов напрямую у объектов Dog и Cat
+    Dog rex("Рекс", 4, "Овчарка");
+    Cat vasya("Васька", 1, false);
     
-    for (int i = 0; i < 2; i++) {
-        animals[i]->makeSound();
-        animals[i]->displayInfo();
-        cout << endl;
-    }
+    rex.makeSound();   // версия Dog
+    rex.displayInfo();
+    cout << endl;
     
-    // Освобождение памяти
-    for (int i = 0; i < 2; i++) {
-        delete animals[i];
-    }
+    vasya.makeSound(); // версия Cat
+    vasya.displayInfo();
     
     cout << "\n=== КОНЕЦ ДЕМОНСТРАЦИИ ===" << endl;
 }
@@ -534,19 +351,19 @@ public:
         cout << "Создана фигура: " << name << endl;
     }
     
-    virtual double getArea() {
+    double getArea() {
         return 0;
     }
     
-    virtual double getPerimeter() {
+    double getPerimeter() {
         return 0;
     }
     
-    virtual void displayInfo() {
+    void displayInfo() {
         cout << "Фигура: " << name << endl;
     }
     
-    virtual ~Shape() {
+    ~Shape() {
         cout << "Уничтожена фигура: " << name << endl;
     }
 };
@@ -559,15 +376,15 @@ private:
 public:
     Rectangle(double w, double h) : Shape("Прямоугольник"), width(w), height(h) {}
     
-    double getArea() override {
+    double getArea() {
         return width * height;
     }
     
-    double getPerimeter() override {
+    double getPerimeter() {
         return 2 * (width + height);
     }
     
-    void displayInfo() override {
+    void displayInfo() {
         cout << "Прямоугольник: " << width << " x " << height << endl;
         cout << "Площадь: " << getArea() << ", Периметр: " << getPerimeter() << endl;
     }
@@ -580,15 +397,15 @@ private:
 public:
     Circle(double r) : Shape("Круг"), radius(r) {}
     
-    double getArea() override {
+    double getArea() {
         return 3.14159 * radius * radius;
     }
     
-    double getPerimeter() override {
+    double getPerimeter() {
         return 2 * 3.14159 * radius;
     }
     
-    void displayInfo() override {
+    void displayInfo() {
         cout << "Круг: радиус " << radius << endl;
         cout << "Площадь: " << getArea() << ", Периметр: " << getPerimeter() << endl;
     }
@@ -603,20 +420,13 @@ void exercise1() {
     rect.displayInfo();
     circle.displayInfo();
     
-    // Полиморфизм
-    Shape* shapes[2];
-    shapes[0] = new Rectangle(6.0, 4.0);
-    shapes[1] = new Circle(5.0);
+    cout << "\n=== ЕЩЁ ФИГУРЫ (ПРЯМОЙ ВЫЗОВ) ===" << endl;
+    Rectangle rect2(6.0, 4.0);
+    Circle circle2(5.0);
     
-    cout << "\n=== ПОЛИМОРФИЗМ ===" << endl;
-    for (int i = 0; i < 2; i++) {
-        shapes[i]->displayInfo();
-        cout << endl;
-    }
-    
-    for (int i = 0; i < 2; i++) {
-        delete shapes[i];
-    }
+    rect2.displayInfo();
+    cout << endl;
+    circle2.displayInfo();
 }
 
 /*
@@ -636,19 +446,19 @@ public:
         cout << "Создано транспортное средство: " << brand << " " << model << endl;
     }
     
-    virtual void start() {
+    void start() {
         cout << brand << " " << model << " заведен" << endl;
     }
     
-    virtual void stop() {
+    void stop() {
         cout << brand << " " << model << " заглушен" << endl;
     }
     
-    virtual void displayInfo() {
+    void displayInfo() {
         cout << brand << " " << model << " (" << year << ")" << endl;
     }
     
-    virtual ~Vehicle() {
+    ~Vehicle() {
         cout << "Уничтожено транспортное средство: " << brand << " " << model << endl;
     }
 };
@@ -660,11 +470,11 @@ private:
 public:
     Car(string b, string m, int y, int d) : Vehicle(b, m, y), doors(d) {}
     
-    void start() override {
+    void start() {
         cout << "Автомобиль " << brand << " " << model << " заведен" << endl;
     }
     
-    void displayInfo() override {
+    void displayInfo() {
         cout << "Автомобиль: " << brand << " " << model << " (" << year << "), дверей: " << doors << endl;
     }
     
@@ -680,11 +490,11 @@ private:
 public:
     Motorcycle(string b, string m, int y, bool w) : Vehicle(b, m, y), hasWindshield(w) {}
     
-    void start() override {
+    void start() {
         cout << "Мотоцикл " << brand << " " << model << " заведен" << endl;
     }
     
-    void displayInfo() override {
+    void displayInfo() {
         cout << "Мотоцикл: " << brand << " " << model << " (" << year 
              << "), ветровое стекло: " << (hasWindshield ? "Да" : "Нет") << endl;
     }
@@ -726,15 +536,15 @@ public:
         cout << "Создан сотрудник: " << name << endl;
     }
     
-    virtual void work() {
+    void work() {
         cout << name << " работает" << endl;
     }
     
-    virtual void displayInfo() {
+    void displayInfo() {
         cout << "Сотрудник: " << name << ", ID: " << id << ", Зарплата: " << salary << endl;
     }
     
-    virtual ~Employee() {
+    ~Employee() {
         cout << "Уволен сотрудник: " << name << endl;
     }
 };
@@ -746,11 +556,11 @@ private:
 public:
     Manager(string n, int i, double s, int ts) : Employee(n, i, s), teamSize(ts) {}
     
-    void work() override {
+    void work() {
         cout << name << " управляет командой из " << teamSize << " человек" << endl;
     }
     
-    void displayInfo() override {
+    void displayInfo() {
         cout << "Менеджер: " << name << ", ID: " << id << ", Зарплата: " << salary 
              << ", Размер команды: " << teamSize << endl;
     }
@@ -767,11 +577,11 @@ private:
 public:
     Developer(string n, int i, double s, string lang) : Employee(n, i, s), programmingLanguage(lang) {}
     
-    void work() override {
+    void work() {
         cout << name << " программирует на " << programmingLanguage << endl;
     }
     
-    void displayInfo() override {
+    void displayInfo() {
         cout << "Разработчик: " << name << ", ID: " << id << ", Зарплата: " << salary 
              << ", Язык программирования: " << programmingLanguage << endl;
     }
@@ -799,33 +609,33 @@ void exercise3() {
 
 /*
 ДОМАШНИЕ ЗАДАНИЯ:
+(Без абстрактных классов и без массивов Base*. Это будет в уроке 17.)
 
-Задание 1: Наследование для банковских счетов
-Создай базовый класс Account и производные классы:
-- SavingsAccount (сберегательный счет)
-- CheckingAccount (текущий счет)
-- CreditAccount (кредитный счет)
+Задание 1: Банковские счета (иерархия)
+Базовый класс Account (номер, владелец, баланс) и производные:
+- SavingsAccount — метод addInterest()
+- CheckingAccount — метод withdrawWithFee()
+Создай объекты каждого типа отдельно и вызови их методы.
 
-Задание 2: Наследование для игровых персонажей
-Создай базовый класс Character и производные классы:
-- Warrior (воин)
-- Mage (маг)
-- Archer (лучник)
+Задание 2: Транспорт
+Базовый класс Vehicle (марка, скорость) и производные:
+- Car — число дверей
+- Bike — есть ли корзина
+У каждого — свой метод displayInfo() (можно переопределить).
 
-Задание 3: Наследование для музыкальных инструментов
-Создай базовый класс Instrument и производные классы:
-- Guitar (гитара)
-- Piano (пианино)
-- Drums (барабаны)
+Задание 3: Фигуры без полиморфного массива
+Базовый Shape с полями и метод area() в производных:
+- Rectangle, Circle
+Посчитай площади, создавая объекты по отдельности (не через Shape*).
 
 ПРОВЕРОЧНЫЕ ВОПРОСЫ:
 
 1. Что такое наследование?
 2. В чем разница между базовым и производным классом?
 3. Что такое переопределение методов?
-4. Что такое виртуальные функции?
-5. Что такое полиморфизм?
-6. Зачем нужен виртуальный деструктор?
+4. Зачем нужен protected?
+5. Чем public-наследование отличается от private?
+6. Что означает отношение «является» (is-a)?
 7. Какие модификаторы наследования существуют?
 
 ЧТО ДАЛЬШЕ:

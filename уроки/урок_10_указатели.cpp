@@ -544,7 +544,7 @@ int stringLength(const char *str) {
 void exercise5() {
     char str[100];
     cout << "Введите строку: ";
-    cin.ignore(); // очищаем буфер
+    cin.ignore(); // очищаем буфер после предыдущего ввода (урок 8: cin >> + getline)
     cin.getline(str, 100);
     
     int length = stringLength(str);
